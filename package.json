@@ -1,0 +1,44 @@
+{
+  "name": "shopping_list",
+  "version": "0.0.0",
+  "description": "",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexnm/shopping_list.git"
+  },
+  "author": "alexnm",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/alexnm/shopping_list/issues"
+  },
+  "homepage": "https://github.com/alexnm/shopping_list",
+  "scripts": {
+    "start": "watchify index.js -o bundle.js -v",
+    "build": "browserify index.js | uglifyjs -cm > bundle.min.js"
+  },
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "presets": [
+            "react",
+            "es2015"
+          ]
+        }
+      ]
+    ]
+  },
+  "dependencies": {
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babelify": "^7.2.0",
+    "body-parser": "^1.14.2",
+    "express": "^4.13.3",
+    "react": "^0.14.5",
+    "react-dom": "^0.14.5",
+    "react-redux": "^4.0.6",
+    "redux": "^3.0.5"
+  }
+}
