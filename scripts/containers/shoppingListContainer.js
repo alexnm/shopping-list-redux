@@ -1,33 +1,21 @@
 import React from "react";
 import ShoppingList from "../components/shoppingList";
-import { addItem, checkItem, removeItem, clearList } from "../actions";
+import { addItem, checkItem, removeItem } from "../actions";
+import { connect } from "react-redux";
 
-const ShoppingListContainer = React.createClass( {
-    componentDidMount( ) {
-        console.log( this.context.store );
-        this.unsubscribe = this.context.store.subscribe( ( ) => this.forceUpdate( ) );
-    },
-
-    componentWillUnmount( ) {
-        this.unsubscribe( );
-    },
-
-    render( ) {
-        const { store } = this.context;
-        const state = store.getState( );
-
-        return (
-            <ShoppingList shoppingList={ state.shoppingList }
-                          onAddItem={ ( name, qty ) => store.dispatch( addItem( name, qty ) ) }
-                          onCheckItem={ ( index ) => store.dispatch( checkItem( index ) ) }
-                          onRemoveItem={ ( index ) => store.dispatch( removeItem( index ) ) }
-                          onClearList={ ( ) => store.dispatch( clearList( ) ) }/>
-        );
-    }
+const mapStateToProps = ( state ) => ( {
+    shoppingList: state.shoppingList
 } );
 
-ShoppingListContainer.contextTypes = {
-    store: React.PropTypes.object
-};
+const mapDispatchToProps = ( dispatch ) => ( {
+    onAddItem: ( name, qty ) => dispatch( addItem( name, qty ) ),
+    onCheckItem: ( index ) => dispatch( checkItem( index ) ),
+    onRemoveItem: ( index ) => dispatch( removeItem( index ) )
+} );
+
+const ShoppingListContainer = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)( ShoppingList );
 
 export default ShoppingListContainer;

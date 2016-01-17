@@ -17,11 +17,6 @@ export default ( { shoppingList, onAddItem, onRemoveItem, onCheckItem, onClearLi
             <div>
                 { items }
             </div>
-            <div>
-                <button onClick={ onClearList }>
-                    Clear Shopping List
-                </button>
-            </div>
             <input ref={ node => { name = node; } } />
             <input ref={ node => { qty = node; } } />
             <button onClick={ ( ) => {

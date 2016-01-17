@@ -14,6 +14,11 @@ const addItem = ( name, qty ) => ( {
     qty: qty
 } );
 
+const addCategory = ( name ) => ( {
+    type: "ADD_CATEGORY",
+    name: name
+} );
+
 const clearList = ( ) => ( {
     type: "CLEAR_LIST"
 } );
@@ -22,5 +27,6 @@ export {
     removeItem,
     checkItem,
     addItem,
+    addCategory,
     clearList
 };
