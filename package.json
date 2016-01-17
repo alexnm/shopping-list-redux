@@ -14,8 +14,8 @@
   },
   "homepage": "https://github.com/alexnm/shopping_list",
   "scripts": {
-    "start": "watchify index.js -o bundle.js -v",
-    "build": "browserify index.js | uglifyjs -cm > bundle.min.js"
+    "start": "watchify scripts/index.js -p livereactload -o bundle.js -v",
+    "build": "browserify scripts/index.js | uglifyjs -cm > bundle.min.js"
   },
   "browserify": {
     "transform": [
@@ -40,5 +40,10 @@
     "react-dom": "^0.14.5",
     "react-redux": "^4.0.6",
     "redux": "^3.0.5"
+  },
+  "devDependencies": {
+    "babel-plugin-react-transform": "^2.0.0-beta1",
+    "livereactload": "^2.1.0",
+    "react-proxy": "^1.1.2"
   }
 }

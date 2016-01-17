@@ -1,0 +1,7 @@
+.item {
+  cursor: pointer;
+}
+
+.item.checked {
+  text-decoration: line-through;
+}
