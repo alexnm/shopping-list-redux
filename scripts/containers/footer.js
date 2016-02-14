@@ -1,22 +1,27 @@
 import React from "react";
 import { connect } from "react-redux";
-import { addCategory, clearList } from "../actions";
+import { addCategory, clearList, saveList } from "../actions";
 
 const Footer = ( { dispatch } ) => {
     let categoryName;
-    const dispatchAddCategory = ( ) => dispatch( addCategory( categoryName ) );
-    const dispatchClearList = ( ) => dispatch( clearList( ) );
+    const onAddCategory = ( ) => {
+        dispatch( addCategory( categoryName.value ) );
+        dispatch( saveList( ) );
+        categoryName.value = "";
+    };
+
+    const onClearList = ( ) => dispatch( clearList( ) );
 
     return (
-        <div>
+        <p>
             <input type="text" ref={ node => categoryName = node }/>
-            <a href="javascript:void(0);" onClick={ dispatchAddCategory }>
+            <a href="javascript:void(0);" onClick={ onAddCategory }>
                 Add New Category
-            </a>
-            <a href="javascript:void(0);" onClick={ dispatchClearList }>
+            </a><br/>
+            <a href="javascript:void(0);" onClick={ onClearList }>
                 Clear Shopping List
             </a>
-        </div>
+        </p>
     );
 };
 

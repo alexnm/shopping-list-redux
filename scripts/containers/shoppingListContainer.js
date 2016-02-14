@@ -1,6 +1,6 @@
 import React from "react";
 import ShoppingList from "../components/shoppingList";
-import { addItem, checkItem, removeItem } from "../actions";
+import { addItem, checkItem, removeItem, saveList } from "../actions";
 import { connect } from "react-redux";
 
 const mapStateToProps = ( state ) => ( {
@@ -8,9 +8,18 @@ const mapStateToProps = ( state ) => ( {
 } );
 
 const mapDispatchToProps = ( dispatch ) => ( {
-    onAddItem: ( name, qty ) => dispatch( addItem( name, qty ) ),
-    onCheckItem: ( index ) => dispatch( checkItem( index ) ),
-    onRemoveItem: ( index ) => dispatch( removeItem( index ) )
+    onAddItem: ( name, qty, categoryIndex ) => {
+        dispatch( addItem( name, qty, categoryIndex ) );
+        dispatch( saveList( ) );
+    },
+    onCheckItem: ( index, categoryIndex ) => {
+        dispatch( checkItem( index, categoryIndex ) );
+        dispatch( saveList( ) );
+    },
+    onRemoveItem: ( index, categoryIndex ) => {
+        dispatch( removeItem( index, categoryIndex ) );
+        dispatch( saveList( ) );
+    }
 } );
 
 const ShoppingListContainer = connect(
