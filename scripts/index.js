@@ -7,7 +7,7 @@ import createLogger from "redux-logger";
 import ShoppingListContainer from "./containers/shoppingListContainer";
 import Footer from "./containers/footer";
 import reducer from "./reducer";
-import { fetchList } from "./actions";
+import { fetchList } from "./actions/listActions";
 
 const loggerMiddleware = createLogger( );
 

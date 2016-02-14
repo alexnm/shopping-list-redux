@@ -10,14 +10,14 @@ app.use( bodyParser.urlencoded( { extended: true } ) );
 app.get( "/api/list", function( req, res ) {
 	res.header( "Content-Type", "application/json" );
 	fs.readFile( "data.json", "utf8", function read( err, data ) {
-		res.send( { shoppingList: JSON.parse( data ) } );
+		setTimeout( function( ) { res.send( { shoppingList: JSON.parse( data ) } ); }, 1000 );
 	} );
 
 } );
 
 app.post( "/api/save", function( req, res ) {
 	fs.writeFile( "data.json", JSON.stringify( req.body.shoppingList ), "utf8", function() {
-		res.send( { success: true } );
+		setTimeout( function( ) { res.send( { success: true } ); }, 1000 );
 	} );
 } );
 

@@ -1,4 +1,5 @@
 import request from "superagent";
+import { callStarted, callEnded } from "./spinnerActions";
 
 const addItem = ( name, qty, categoryIndex ) => ( {
     type: "ADD_ITEM",
@@ -28,30 +29,30 @@ const clearList = ( ) => ( {
     type: "CLEAR_LIST"
 } );
 
-const requestList = ( ) => ( {
-    type: "FETCH_LIST"
-} );
-
 const requestListCompleted = list => ( {
     type: "FETCH_LIST_COMPLETED",
     list
 } );
 
 const fetchList = ( ) => ( dispatch ) => {
-    dispatch( requestList( ) );
+    dispatch( callStarted( ) );
 
     request
         .get( "/api/list" )
-        .end( ( err, res ) => dispatch( requestListCompleted( res.body.shoppingList ) ) );
+        .end( ( err, res ) => {
+            dispatch( requestListCompleted( res.body.shoppingList ) );
+            dispatch( callEnded( ) );
+        } );
 };
 
 const saveList = ( ) => ( dispatch, getState ) => {
     const list = getState( ).shoppingList;
+    dispatch( callStarted( ) );
 
     request
         .post( "/api/save" )
         .send( { shoppingList: list } )
-        .end( ( err, res ) => console.log( "list saved" ) );
+        .end( ( err, res ) => dispatch( callEnded( ) ) );
 };
 
 export {

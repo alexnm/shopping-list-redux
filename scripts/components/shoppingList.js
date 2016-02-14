@@ -1,7 +1,13 @@
 import React from "react";
 import ShoppingListItem from "./shoppingListItem";
 
-export default ( { shoppingList, onAddItem, onRemoveItem, onCheckItem } ) => {
+export default ( { shoppingList, busy, onAddItem, onRemoveItem, onCheckItem } ) => {
+
+    console.log( busy );
+    if ( busy ) {
+        return ( <div>Please wait...</div> );
+    }
+
     if ( !shoppingList.categories ) {
         return <noscript/>;
     }

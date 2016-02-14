@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { addCategory, clearList, saveList } from "../actions";
+import { addCategory, clearList, saveList } from "../actions/listActions";
 
 const Footer = ( { dispatch } ) => {
     let categoryName;

@@ -1,10 +1,11 @@
 import React from "react";
 import ShoppingList from "../components/shoppingList";
-import { addItem, checkItem, removeItem, saveList } from "../actions";
+import { addItem, checkItem, removeItem, saveList } from "../actions/listActions";
 import { connect } from "react-redux";
 
 const mapStateToProps = ( state ) => ( {
-    shoppingList: state.shoppingList
+    shoppingList: state.shoppingList,
+    busy: state.busy
 } );
 
 const mapDispatchToProps = ( dispatch ) => ( {

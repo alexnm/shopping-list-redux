@@ -76,6 +76,18 @@ const shoppingList = ( state = { }, action ) => {
     }
 };
 
+const busy = ( state = false, action ) => {
+    switch ( action.type ) {
+        case "CALL_STARTED":
+            return true;
+        case "CALL_ENDED":
+            return false;
+        default:
+            return state;
+    }
+};
+
 export default combineReducers( {
-    shoppingList
+    shoppingList,
+    busy
 } );
