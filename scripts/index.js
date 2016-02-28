@@ -1,24 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
-import thunkMiddleware from "redux-thunk";
-import createLogger from "redux-logger";
 import ShoppingListContainer from "./containers/shoppingListContainer";
 import Footer from "./containers/footer";
-import reducer from "./reducer";
+import { configureStore } from "./store";
 import { fetchList } from "./actions/listActions";
 
-const loggerMiddleware = createLogger( );
-
-const createStoreWithMiddleware = applyMiddleware(
-    loggerMiddleware,
-    thunkMiddleware
-)( createStore );
-
-const store = createStoreWithMiddleware( reducer );
-
-store.dispatch( fetchList( ) );
+const store = configureStore( window.__INITIAL_STATE__ );
 
 ReactDOM.render(
     <Provider store={ store }>

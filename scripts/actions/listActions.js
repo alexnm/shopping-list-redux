@@ -1,5 +1,7 @@
-import request from "superagent";
+import fetch from "isomorphic-fetch";
 import { callStarted, callEnded } from "./spinnerActions";
+
+const baseUrl = typeof window === "undefined" ? "http://localhost:1337" : "";
 
 const addItem = ( name, qty, categoryIndex ) => ( {
     type: "ADD_ITEM",
@@ -37,10 +39,10 @@ const requestListCompleted = list => ( {
 const fetchList = ( ) => ( dispatch ) => {
     dispatch( callStarted( ) );
 
-    request
-        .get( "/api/list" )
-        .end( ( err, res ) => {
-            dispatch( requestListCompleted( res.body.shoppingList ) );
+    return fetch( `${ baseUrl }/api/list` )
+        .then( ( response ) => response.json( ) )
+        .then( res => {
+            dispatch( requestListCompleted( res.shoppingList ) );
             dispatch( callEnded( ) );
         } );
 };
@@ -49,10 +51,14 @@ const saveList = ( ) => ( dispatch, getState ) => {
     const list = getState( ).shoppingList;
     dispatch( callStarted( ) );
 
-    request
-        .post( "/api/save" )
-        .send( { shoppingList: list } )
-        .end( ( err, res ) => dispatch( callEnded( ) ) );
+    return fetch( `${ baseUrl }/api/list`, {
+          method: "POST",
+          body: { shoppingList: list }
+        } )
+        .then( res => {
+            dispatch( requestListCompleted( res.shoppingList ) );
+            dispatch( callEnded( ) );
+        } );
 };
 
 export {
